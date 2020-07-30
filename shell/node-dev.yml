@@ -1,0 +1,12 @@
+- hosts: "MGR01:MGR02:!10.128.98.226:!10.128.98.225"
+  gather_facts: no
+  remote_user: tomcat
+  tasks:
+    - name: 上传prometheus节点node_exporter安装包
+      copy: "src=/app/IBM/wasdeploy/shell_xiaxh/node_exporter.zip dest=/app/tomcat/scriptdeploy owner=tomcat group=tomcat mode=755 "
+    - name: 安装node_exporter
+      script: " /app/IBM/wasdeploy/shell_xiaxh/node_exporter.sh"
+      register: msg
+    - name: 查看详情
+      debug: var=msg.stdout_lines
+

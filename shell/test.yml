@@ -1,0 +1,9 @@
+- hosts: ZDXS 
+  gather_facts: no
+  remote_user: tomcat
+  tasks:
+    - name: 查询主机状态
+      script: "/app/IBM/wasdeploy/shell_xiaxh/statistics_free.sh"
+      register: msg 
+    - name: DEBUG查询结果
+      debug: var=msg.stdout_lines
